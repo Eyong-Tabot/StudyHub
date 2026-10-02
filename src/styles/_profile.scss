@@ -1,0 +1,22 @@
+// Import shared variables
+@use "variables";
+
+#profile {
+    h2 {
+        color: variables.$secondary-color;
+        font-weight: 700;
+    }
+
+    .card {
+        border: 1px solid variables.$border-color;
+        border-radius: variables.$card-radius;
+    }
+
+    .card-title {
+        color: variables.$secondary-color;
+    }
+
+    .card-text {
+        color: variables.$muted-color;
+    }
+}

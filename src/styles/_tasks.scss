@@ -1,0 +1,29 @@
+// Import shared variables
+@use "variables";
+
+#tasks {
+    // Section heading
+    h2 {
+        color: variables.$secondary-color;
+        font-weight: 700;
+    }
+
+    // Give task input a comfortable height
+    .form-control {
+        min-height: 45px;
+    }
+
+    // Customize individual task items
+    .list-group-item {
+        border-color: variables.$border-color;
+    }
+
+    // Add a small transition to task buttons
+    button {
+        transition: transform 0.15s ease;
+
+        &:hover {
+            transform: translateY(-1px);
+        }
+    }
+}

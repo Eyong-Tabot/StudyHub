@@ -1,0 +1,38 @@
+// Import shared StudyHub variables
+@use "variables";
+
+#dashboard {
+    // Customize the dashboard heading
+    h2 {
+        color: variables.$secondary-color;
+        font-weight: 700;
+    }
+
+    // Customize Bootstrap cards
+    .card {
+        border: 1px solid variables.$border-color;
+        border-radius: variables.$card-radius;
+
+        // Add a subtle transition when the card changes
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+
+        &:hover {
+            // Slightly lift the card on hover
+            transform: translateY(-3px);
+
+            // Add a subtle shadow
+            box-shadow:
+                0 8px 20px rgba(15, 23, 42, 0.08);
+        }
+    }
+
+    .card-title {
+        color: variables.$secondary-color;
+    }
+
+    .card-text {
+        color: variables.$muted-color;
+    }
+}

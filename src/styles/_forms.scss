@@ -1,0 +1,20 @@
+// Import shared variables
+@use "variables";
+
+#registration {
+    h2 {
+        color: variables.$secondary-color;
+        font-weight: 700;
+    }
+
+    // Add a little more space around form controls
+    .form-control {
+        min-height: 45px;
+    }
+
+    // Make labels slightly stronger
+    .form-label {
+        font-weight: 600;
+        color: variables.$text-color;
+    }
+}

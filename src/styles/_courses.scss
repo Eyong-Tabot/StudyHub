@@ -1,0 +1,39 @@
+// Import shared variables
+@use "variables";
+
+#courses {
+    // Section heading
+    h2 {
+        color: variables.$secondary-color;
+        font-weight: 700;
+    }
+
+    // Course cards
+    .card {
+        border: 1px solid variables.$border-color;
+        border-radius: variables.$card-radius;
+
+        // Smooth hover animation
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: translateY(-3px);
+        }
+    }
+
+    // Course title
+    .card-title {
+        color: variables.$secondary-color;
+        font-weight: 600;
+    }
+
+    // Progress bar customization
+    .progress {
+        height: 8px;
+        border-radius: 20px;
+    }
+
+    .progress-bar {
+        background-color: variables.$primary-color;
+    }
+}

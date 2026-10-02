@@ -1,0 +1,23 @@
+// Import all StudyHub style modules
+
+@use "variables";
+@use "navbar";
+@use "dashboard";
+@use "courses";
+@use "tasks";
+@use "profile";
+@use "forms";
+
+// Global StudyHub styles
+body {
+    background-color: variables.$background-color;
+    color: variables.$text-color;
+
+    // Remove the browser's default body margin
+    margin: 0;
+}
+
+// Make section spacing consistent
+section {
+    scroll-margin-top: 80px;
+}

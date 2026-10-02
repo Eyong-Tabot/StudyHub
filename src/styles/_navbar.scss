@@ -1,0 +1,26 @@
+// Import StudyHub variables
+@use "variables";
+
+// Customize the Bootstrap navigation bar
+.navbar {
+    border-bottom: 1px solid variables.$border-color;
+
+    // Customize the StudyHub brand
+    .navbar-brand {
+        color: variables.$primary-color;
+        font-weight: 700;
+    }
+
+    // Customize navigation links
+    .nav-link {
+        color: variables.$text-color;
+
+        // Add a small transition when hovering
+        transition: color 0.2s ease;
+
+        // Change link color on hover
+        &:hover {
+            color: variables.$primary-color;
+        }
+    }
+}

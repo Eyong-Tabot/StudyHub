@@ -1,0 +1,30 @@
+# Frontend dependencies.
+node_modules/
+
+# Backend dependencies.
+server/node_modules/
+
+# Build output.
+dist/
+server/dist/
+
+# Local environment files containing secrets.
+.env
+.env.*
+
+# Keep the safe example configuration in Git.
+!.env.example
+server/.env
+server/.env.*
+!server/.env.example
+
+# Local editor and operating-system files.
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+#Ignore installed Node.js packages.
+node_modules/
+
+#Ignore production builds.
+dist/
