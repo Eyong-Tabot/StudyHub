@@ -1,56 +1,57 @@
-// Load environment variables before starting the application.
-require("dotenv").config();
-
 // Import Express.
 const express = require("express");
 
-// Import CORS support.
+// Import CORS.
 const cors = require("cors");
 
-// Import HTTP-only cookie parsing.
+// Import cookie-parser.
 const cookieParser = require("cookie-parser");
 
-// Import security headers.
+// Import Helmet for secure HTTP headers.
 const helmet = require("helmet");
 
-// Import API rate limiting.
+// Import rate limiter.
 const rateLimit = require("express-rate-limit");
 
-// Import the database pool for health checks.
-const pool = require("./db");
-
-// Import API routes.
-const taskRoutes = require("./routes/tasks");
-const courseRoutes = require("./routes/courses");
+// Import authentication routes.
 const authRoutes = require("./routes/auth");
+
+// Import task routes.
+const taskRoutes = require("./routes/tasks");
+
+// Import course routes.
+const courseRoutes = require("./routes/courses");
+
+// Import the PostgreSQL connection pool.
+const pool = require("./db");
 
 // Create the Express application.
 const app = express();
 
-// Use the hosting provider's port or 3000 locally.
-const PORT = process.env.PORT || 3000;
+// Tell Express that it is running behind Render's reverse proxy.
+// This allows Express and express-rate-limit to correctly
+// process forwarded client information such as X-Forwarded-For.
+app.set("trust proxy", 1);
 
-// Reject startup when critical secrets are missing.
-if (!process.env.JWT_SECRET) {
-    throw new Error("JWT_SECRET is not configured.");
-}
+// Use Render's deployment port or port 3000 locally.
+const PORT = process.env.PORT || 3000;
 
 // Add security-related HTTP headers.
 app.use(helmet());
 
-// Allow only the configured frontend to send credentialed requests.
+// Allow requests from the React frontend.
 app.use(cors({
     origin: process.env.FRONTEND_URL || "http://localhost:5173",
     credentials: true
 }));
 
 // Parse JSON request bodies.
-app.use(express.json({ limit: "100kb" }));
+app.use(express.json());
 
-// Parse authentication cookies.
+// Parse HTTP cookies.
 app.use(cookieParser());
 
-// Apply a general API request limit.
+// Limit repeated requests to the API.
 const apiLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 300,
@@ -59,24 +60,22 @@ const apiLimiter = rateLimit({
     }
 });
 
-// Apply the limiter to all API endpoints.
+// Apply the general API rate limiter.
 app.use("/api", apiLimiter);
 
-// Health endpoint used for local and deployment checks.
+// Basic health check.
 app.get("/health", async function (req, res) {
     try {
-        // Confirm that PostgreSQL is reachable.
+        // Test the PostgreSQL connection.
         await pool.query("SELECT 1");
 
-        // Report a healthy application.
+        // Report a healthy backend and database.
         res.json({
             status: "ok",
             database: "connected"
         });
     } catch (error) {
-        // Report an unhealthy dependency without exposing details.
-        console.error("Health check failed:", error.message);
-
+        // Report that the database is unavailable.
         res.status(503).json({
             status: "error",
             database: "unavailable"
@@ -84,23 +83,25 @@ app.get("/health", async function (req, res) {
     }
 });
 
-// Simple root endpoint.
+// Root endpoint.
 app.get("/", function (req, res) {
     res.json({
-        message: "StudyHub backend is running"
+        message: "Studyhub backend is running"
     });
 });
 
-// Authentication endpoints.
+// Authentication routes.
 app.use("/api/auth", authRoutes);
 
-// Public course endpoints.
-app.use("/api/courses", courseRoutes);
-
-// Protected task endpoints.
+// Protected task routes.
 app.use("/api/tasks", taskRoutes);
 
-// Start the API server.
+// Course routes.
+app.use("/api/courses", courseRoutes);
+
+// Start the server.
 app.listen(PORT, function () {
-    console.log(`StudyHub backend running on port ${PORT}`);
+    console.log(
+        `StudyHub backend running on port ${PORT}`
+    );
 });
