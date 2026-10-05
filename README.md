@@ -1,116 +1,130 @@
 # StudyHub
 
-StudyHub is a React learning dashboard with a PostgreSQL-backed Express API.
+StudyHub is a full-stack educational platform that I built as a learning
+project while studying web development.
 
-## Project structure
+The project started as a simple HTML/CSS/JavaScript application and was
+progressively rebuilt using React and a backend architecture.
 
-```text
-StudyHub-react/
-├── public/
-├── src/
-│   ├── components/
-│   ├── features/
-│   ├── assets/
-│   ├── config.js
-│   ├── App.jsx
-│   ├── main.jsx
-│   └── styles/
-├── server/
-│   ├── middleware/
-│   ├── routes/
-│   ├── db.js
-│   ├── schema.sql
-│   ├── server.js
-│   ├── .env.example
-│   └── package.json
-├── .env.example
-├── .gitignore
-├── package.json
-└── index.html
-```
+## Purpose
 
-## Local setup
+The purpose of StudyHub was to learn how the different parts of a modern
+web application work together.
 
-### 1. Create the PostgreSQL database
+This is a learning/capstone project rather than a production SaaS product.
 
-Create a PostgreSQL database named `studyhub`.
+## Technologies
 
-Then run `server/schema.sql` inside that database. The script creates the `users`, `courses`, and `tasks` tables, indexes, and starter courses.
+### Frontend
 
-### 2. Configure the backend
+- HTML
+- CSS
+- JavaScript
+- React
+- Redux Toolkit
+- React Redux
+- Bootstrap
+- Sass
+- Vite
 
-Copy `server/.env.example` to `server/.env` and fill in the PostgreSQL password and a long random `JWT_SECRET`.
+### Backend
 
-Never commit `server/.env`.
+- Node.js
+- Express
+- REST APIs
+- CORS
+- Helmet
+- Express Rate Limit
 
-### 3. Install frontend dependencies
+### Database
 
-```bash
-npm install
-```
+- PostgreSQL
+- SQL
+- Relational database design
 
-### 4. Install backend dependencies
+### Authentication
 
-```bash
-cd server
-npm install
-```
+- JWT
+- HTTP-only cookies
+- Authentication middleware
+- Protected API routes
+- Password hashing with bcrypt
 
-### 5. Start the backend
+### Development
 
-From the `server` folder:
+- Git
+- GitHub
+- Environment variables
+- Render deployment
 
-```bash
-npm run dev
-```
+## Features
 
-The API runs on `http://localhost:3000` by default.
+- User registration
+- User login
+- User logout
+- Authentication
+- Protected routes
+- User-specific tasks
+- Course management
+- PostgreSQL persistence
+- Responsive interface
+- REST API
+- Input validation
+- Rate limiting
+- Security headers
 
-### 6. Start the frontend
 
-Open another terminal in the project root:
 
-```bash
-npm run dev
-```
+# StudyHub Project Status
 
-The React application normally runs on `http://localhost:5173`.
+## Status
 
-## Frontend environment configuration
+Completed as a learning/capstone project.
 
-The root `.env.example` contains:
+Development is currently paused.
 
-```env
-VITE_API_URL=http://localhost:3000
-```
+## Completed Areas
 
-For production, set `VITE_API_URL` to the deployed API origin before building the frontend.
+- HTML fundamentals
+- CSS and responsive design
+- JavaScript fundamentals
+- DOM manipulation
+- localStorage
+- Fetch API
+- Async JavaScript
+- React
+- Redux Toolkit
+- Bootstrap
+- Sass
+- Express
+- REST APIs
+- PostgreSQL
+- Authentication
+- Authorization
+- JWT
+- HTTP-only cookies
+- Password hashing
+- Environment variables
+- CORS
+- Helmet
+- Rate limiting
+- Git/GitHub
+- Cloud deployment
 
-## Security notes
+## Known Limitations
 
-- Passwords are hashed with bcrypt before storage.
-- Authentication uses short-lived JWTs stored in HTTP-only cookies.
-- Task endpoints require authentication and enforce user ownership at the database query level.
-- Helmet supplies security-related HTTP headers.
-- API requests are rate limited.
-- SQL queries use PostgreSQL parameters instead of string concatenation.
-- Real environment files are excluded from Git.
-- HTTPS must be enabled by the production hosting layer.
+The deployed version still has an authentication persistence issue in
+production where the authentication cookie requires additional debugging.
 
-## Useful commands
+The application should therefore be considered a learning project and
+not a production-ready application.
 
-From the project root:
+## Why Development Was Paused
 
-```bash
-npm run dev
-npm run lint
-npm run build
-npm run preview
-```
+The purpose of StudyHub was primarily educational.
 
-From `server/`:
+The next stage of learning is to build a smaller project independently
+without relying heavily on AI assistance.
 
-```bash
-npm run dev
-npm start
-```
+StudyHub will remain available as a reference for the technologies and
+concepts learned during its development.
